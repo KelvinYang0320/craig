@@ -1,29 +1,13 @@
-import itertools
 import os
 import subprocess
 import time
 import gc
 
-from nearpy import Engine
-from nearpy.distances import EuclideanDistance
-from nearpy.filters import NearestFilter
-from nearpy.hashes import RandomBinaryProjections
-import matplotlib.pyplot as plt
 import numpy as np
 from lazy_greedy import FacilityLocation, lazy_greedy_heap
-import scipy.spatial
-# from eucl_dist.cpu_dist import dist
-# from eucl_dist.gpu_dist import dist as gdist
 
-
-from multiprocessing.dummy import Pool as ThreadPool
-from itertools import repeat
 import sklearn
 
-# from lazy_greedy import FacilityLocation, lazy_greedy, lazy_greedy_heap
-# from set_cover import SetCover
-
-from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
 from tensorflow.examples.tutorials.mnist import input_data
 
 SEED = 100
