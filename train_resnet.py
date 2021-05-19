@@ -18,7 +18,7 @@ import util
 from warnings import simplefilter
 from GradualWarmupScheduler import *
 
-
+print(torch.cuda.is_available())
 # ignore all future warnings
 simplefilter(action='ignore', category=FutureWarning)
 np.seterr(all='ignore')
@@ -191,6 +191,7 @@ def main(subset_size=.1, greedy=0):
     times_selected = np.zeros((runs, len(indexed_loader.dataset)))
 
     if args.save_subset:
+        print("saving subset...")
         B = int(args.subset_size * TRAIN_NUM)
         selected_ndx = np.zeros((runs, epochs, B))
         selected_wgt = np.zeros((runs, epochs, B))
@@ -379,8 +380,8 @@ def main(subset_size=.1, greedy=0):
             grd += f'_warm' if args.warm_start > 0 else ''
             grd += f'_feature' if args.cluster_features else ''
             grd += f'_ca' if args.cluster_all else ''
-            folder = f'/tmp/cifar10'
-
+            folder = f'./tmp/cifar10'
+            
             if args.save_subset:
                 print(
                     f'Saving the results to {folder}_{args.ig}_moment_{args.momentum}_{args.arch}_{subset_size}'
@@ -594,6 +595,11 @@ def accuracy(output, target, topk=(1,)):
 
 
 if __name__ == '__main__':
+    path = "./tmp/"
+    try:
+        os.mkdir(path)
+    except:
+        print("File exists...")
     args = parser.parse_args()
     main(subset_size=args.subset_size, greedy=args.greedy)
 
